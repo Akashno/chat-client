@@ -1,6 +1,7 @@
 <template>
   <div class="px-4 pt-4  text-left ">
-    <div class="h-1/3">
+    <ChannelList class="mb-4 md:hidden h-1/3" :socket="socket" />
+    <div class="" >
     <p class="font-bold">Members</p>
     <div v-for="(member, index) in members" :key="index" class="mt-4">
       <div class="flex gap-1">
@@ -17,7 +18,6 @@
       </div>
     </div>
     </div>
-    <ChannelList class="mt-4 md:hidden" :socket="socket" />
   </div>
 </template>
 
@@ -39,7 +39,24 @@ components:{
   },
   created() {
     this.socket.on("roomusers", ({users}) => {
-      this.members = users;
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
+      this.members.push(users);
     });
   },
 };

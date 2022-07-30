@@ -4,8 +4,8 @@
     <hr />
     <div class="grid grid-cols-12  text-left ">
       <ChannelList class="col-span-2 px-4  border-r-2 py-4 hidden md:block" />
-      <ChatSection :socket="socket" class="col-span-8"/>
-      <Members :socket="socket"  class="col-span-2"/> 
+      <ChatSection :socket="socket"  :class="$store.getters.isRightSection ? 'col-span-8':'col-span-12 md:col-span-10'"/>
+      <Members v-show="$store.getters.isRightSection" :socket="socket"  class="md:col-span-2 col-span-4"/> 
     </div>
   </div>
 

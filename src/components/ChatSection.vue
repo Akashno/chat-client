@@ -69,8 +69,10 @@ export default {
   },
   mounted() {
     this.socket.on("message", (message) => {
-        this.chats.push(message)
-      this.$refs['chat'].scrollIntoView({behavior: "smooth", block: "end",inline:"end"});
+    this.chats.push(message)
+    let element = this.$refs['chat']
+    if(!element) return 
+    element.scrollIntoView({behavior: "smooth", block: "end",inline:"end"});
     });
   },
   methods: {
