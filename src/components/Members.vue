@@ -39,24 +39,7 @@ components:{
   },
   created() {
     this.socket.on("roomusers", ({users}) => {
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
-      this.members.push(users);
+        this.members = users
     });
   },
 };

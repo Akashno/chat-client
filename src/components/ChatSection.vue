@@ -4,7 +4,7 @@
   >
     <div>
       <div class="flex justify-between items-center mx-4">
-        <p class=" font-bold"># Welcome to {{}}</p>
+        <p class=" font-bold"># Welcome</p>
         <div class="flex items-center space-x-3">
           <span
             class="w-2.5 h-2.5 bg-green-400 ring-1 ring-green-600 border-white dark:border-gray-800 rounded-full"
