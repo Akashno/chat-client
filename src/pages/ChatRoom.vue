@@ -27,19 +27,14 @@ export default {
   data() {
     return {
       socket: io("http://localhost:3000"),
-      chats: [],
     };
   },
   created() {
     this.joinRoom();
-    this.socket.on("message", (msg) => {
-      this.chats.push(msg);
-    });
   },
 
   methods: {
     joinRoom() {
-      debugger
       let username = this.$route.params.username || localStorage.getItem('username')
       let room = this.$route.params.room || localStorage.getItem('room')
       if(!username || username === 'null' || room === 'null') this.$router.go(-1)

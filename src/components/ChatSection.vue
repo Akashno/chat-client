@@ -14,7 +14,7 @@
       </div>
 
       <hr class="mt-2 my-6 mx-0" />
-      <div class="chatSection" >
+      <div class="chatSection "  >
       <div v-for="(chat,index) in chats" :key="index" class="mb-8 mx-4 chat-messages"  >
       <div class="flex  gap-2  " >
         <span class="col-span-1">
@@ -33,6 +33,7 @@
         </span>
       </div>
       </div>
+      <div ref="chat" class="h-14" > </div>
 
       </div>
     </div>
@@ -79,12 +80,14 @@ export default {
   mounted() {
     this.socket.on("message", (message) => {
         this.chats.push(message)
+      this.$refs['chat'].scrollIntoView({behavior: "smooth", block: "end",inline:"end"});
     });
   },
   methods: {
     sendMessage() {
       this.socket.emit("chatMessage", this.message);
-      this.message = ""
+      this.message = ''
+      this.$refs['chat'].scrollIntoView({behavior: "smooth", block: "end",inline:"end"});
     },
   },
 };
@@ -103,4 +106,19 @@ textarea:focus,
 input:focus {
   outline: none;
 }
+   ::-webkit-scrollbar
+    {
+      width: 2px;  /* for vertical scrollbars */
+      height: 12px; /* for horizontal scrollbars */
+    }
+    
+    ::-webkit-scrollbar-track
+    {
+      background: rgba(0, 0, 0, 0.1);
+    }
+    
+    ::-webkit-scrollbar-thumb
+    {
+      background: rgba(0, 0, 0, 0.5);
+    }
 </style>
