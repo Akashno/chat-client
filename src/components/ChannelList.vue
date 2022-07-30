@@ -1,6 +1,5 @@
 <template>
-    <div class="px-4 col-span-2 border-r-2 py-4 ">
-        
+    <div class="font-bold">
      Channels
    </div>
 </template>

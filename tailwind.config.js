@@ -6,7 +6,10 @@ module.exports = {
     extend: {
       colors:{
         primary:"#F2F6FE"
-      }
+      },
+        maxWidth: {
+      '1/2': '1920px',
+    }
     },
   },
   plugins: [],

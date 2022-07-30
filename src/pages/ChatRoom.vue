@@ -1,11 +1,11 @@
 <template>
-  <div class="w-screen ">
+  <div class="w-screen max-w-1/2 mx-auto">
     <NavBar/>
     <hr />
     <div class="grid grid-cols-12  text-left ">
-      <ChannelList/>
-      <ChatSection :socket="socket"/>
-      <Members :socket="socket"/> 
+      <ChannelList class="col-span-2 px-4  border-r-2 py-4 hidden md:block" />
+      <ChatSection :socket="socket" class="col-span-8"/>
+      <Members :socket="socket"  class="col-span-2"/> 
     </div>
   </div>
 

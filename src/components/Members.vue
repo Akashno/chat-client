@@ -1,15 +1,14 @@
 <template>
-  <div class="px-4 pt-4 col-span-2 text-left">
-    <p>Members</p>
+  <div class="px-4 pt-4  text-left ">
+    <div class="h-1/3">
+    <p class="font-bold">Members</p>
     <div v-for="(member, index) in members" :key="index" class="mt-4">
-      <div class="flex gap-2">
-        <span class="col-span-1">
+      <div class="flex gap-1">
           <img
             class="w-7 h-6 rounded-full"
             :src="member.avatar"
             alt=""
           />
-        </span>
         <span class="col-span-11 w-full">
           <div class="flex justify-between">
             <p class="text-sm">{{ member.username }}</p>
@@ -17,11 +16,17 @@
         </span>
       </div>
     </div>
+    </div>
+    <ChannelList class="mt-4 md:hidden" :socket="socket" />
   </div>
 </template>
 
 <script>
+import ChannelList from '../components/ChannelList.vue'
 export default {
+components:{
+ ChannelList
+    },
   props: {
     socket: {
       type: Object,
