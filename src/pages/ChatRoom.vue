@@ -3,8 +3,8 @@
     <NavBar :socket="socket"/>
     <hr />
     <div class="grid grid-cols-12  text-left ">
-      <LeftSection class="col-span-2 px-4  border-r-2 py-4 hidden md:block" />
-      <MiddleSection :socket="socket"  :class="$store.getters.isRightSection ? 'col-span-8':'col-span-12 md:col-span-10'" />
+      <LeftSection  v-show="$store.getters.isLeftSection" class="col-span-2 px-4  border-r-2  hidden md:block" />
+      <MiddleSection :socket="socket"   :class="setGridSpan()"/>
       <RightSection v-show="$store.getters.isRightSection" :socket="socket"  class="md:col-span-2 col-span-4" /> 
     </div>
   </div>
@@ -35,9 +35,19 @@ export default {
     };
   },
   methods:{
-    setSocket(){
+    setGridSpan(){
+      const {isRightSection,isLeftSection} =  this.$store.getters
+      if(isRightSection && isLeftSection){
+        return 'col-span-8'
+      }
+      else if(isRightSection || isLeftSection){
+        return 'md:col-span-10 col-span-12'
+      }else{
+        return 'col-span-12'
+      }
 
-      debugger
+    },
+    setSocket(){
       let isNew = this.$route.params.isNew
       let deviceId = null
       if(isNew)  deviceId = this.getDeviceId()

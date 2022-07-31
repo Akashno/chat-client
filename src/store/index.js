@@ -6,10 +6,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isRightSection:true,
+    isLeftSection:true,
     member:null,
     room:null,
   },
   getters: {
+
+    isLeftSection(state){
+      return state.isLeftSection
+    },
     isRightSection(state){
       return state.isRightSection
     },
@@ -24,6 +29,9 @@ export default new Vuex.Store({
     toggleRightSection(state){
       state.isRightSection = !state.isRightSection
     },
+    toggleLeftSection(state){
+      state.isLeftSection = !state.isLeftSection
+    },
     setMember(state,payload){
       state.member = payload 
     },
@@ -34,6 +42,10 @@ export default new Vuex.Store({
   actions: {
     toggleRightSection({commit}){
       commit('toggleRightSection')
+    },
+
+    toggleLeftSection({commit}){
+      commit('toggleLeftSection')
     },
     setMember({commit},payload){
       commit('setMember',payload)
