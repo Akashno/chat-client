@@ -76,19 +76,19 @@
         <div ref="chat" class="h-14"></div>
       </div>
     </div>
-    <div class="my-4 py-1 flex border-1">
+    <div class=" py-0 flex border-2 rounded-full pl-3 items-center">
       <input
         type="text"
         autofocus
         placeholder="Type your message"
-        class="w-full h-8 px-4 mr-4"
+        class="w-full h-8 px-4 mr-4 "
         @keypress.enter="sendMessage()"
         v-model="message"
       />
       <button
         @click="sendMessage()"
         type="button"
-        class="mx-4 text-blue-700 border border-blue-700 hover:bg-blue-400 hover:text-white focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-blue-500 dark:hover:text-white"
+        class=" text-blue-700 border border-blue-700 hover:bg-blue-400 hover:text-white focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-blue-500 dark:hover:text-white"
       >
         <svg
           aria-hidden="true"
@@ -177,7 +177,7 @@ export default {
 
 <style scoped>
 .chatScreen {
-  height: calc(100vh - 65px);
+  height: calc(100vh - 58px);
 }
 
 .chatSection {
