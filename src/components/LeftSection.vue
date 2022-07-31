@@ -26,7 +26,6 @@
 export default {
   data() {
     return {
-      rooms: [],
       rules: [
         {
           title: "1. Be respectful.",
@@ -50,11 +49,6 @@ export default {
         },
       ],
     };
-  },
-  created() {
-    fetch("http://localhost:3000/rooms")
-      .then((res) => res.json())
-      .then(({ rooms }) => (this.rooms = rooms));
   },
 };
 </script>
