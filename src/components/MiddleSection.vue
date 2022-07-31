@@ -3,20 +3,13 @@
     class=" text-left  pt-4 border-r-2 chatScreen flex flex-col justify-between"
   >
     <div>
-      <div class="flex justify-between items-center mx-4">
-        <p class=" font-bold"># Welcome</p>
-        <div class="flex items-center space-x-3">
-          <span
-            class="w-2.5 h-2.5 bg-green-400 ring-1 ring-green-600 border-white dark:border-gray-800 rounded-full"
-          ></span>
-          <p class="mb-0 text-xs">430 members</p>
-        </div>
-      </div>
+        <p class="mx-4 font-bold"># Welcome</p>
+        
 
       <hr class="mt-2 my-6 mx-0" />
       <div class="chatSection "  >
       <div v-for="(chat,index) in chats" :key="index" class="mb-8 mx-4 chat-messages"  >
-      <div class="flex  gap-2  " >
+      <div class="flex  gap-2  ">
         <span class="col-span-1">
         <img
           class="w-6 h-6 rounded-full "
@@ -27,9 +20,9 @@
         <span class="col-span-11 w-full">
             <div class="flex justify-between ">
             <p class="text-sm">{{chat.username}}</p>
-            <p class="text-xs text-gray-600">{{chat.time}}</p>
+            <p class="text-xs text-gray-600">{{moment(chat.createAt).format('h:mm a')}}</p>
             </div>
-            <p class="text-gray-500 text-xs text-sm">{{chat.text}}</p>
+            <p class="text-gray-500 text-xs text-sm">{{chat.message}}</p>
         </span>
       </div>
       </div>
@@ -55,6 +48,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   props: {
     socket: {
@@ -65,17 +59,35 @@ export default {
     return {
       message: "",
       chats: [ ],
+      username:null,
+      room:null,
+      moment:moment
     };
   },
-  mounted() {
+  mounted(){
     this.socket.on("message", (message) => {
     this.chats.push(message)
     let element = this.$refs['chat']
     if(!element) return 
     element.scrollIntoView({behavior: "smooth", block: "end",inline:"end"});
     });
+      this.username = this.$route.params.username || localStorage.getItem('username')
+      this.room = this.$route.params.room || JSON.parse(localStorage.getItem('room'))
+      if(!this.username || this.username === 'null' || this.room === 'null') this.$router.go(-1)
+      localStorage.setItem('username',this.username)
+      localStorage.setItem('room',JSON.stringify(this.room))
+      this.joinRoom(this.username,this.room._id);
   },
   methods: {
+    joinRoom(username,roomId) {
+      this.socket.emit("userJoin", { username, roomId },(response)=>{
+        this.$store.dispatch('setMember',response.user)
+        if(!response.messages.length) return
+        this.chats = response.messages
+       let element = this.$refs['chat']
+       element.scrollIntoView({behavior: "smooth", block: "end",inline:"end"});
+      });
+    },
     sendMessage() {
       if(!this.message) return
       this.socket.emit("chatMessage", this.message);
@@ -101,7 +113,7 @@ input:focus {
 }
    ::-webkit-scrollbar
     {
-      width: 2px;  /* for vertical scrollbars */
+      width: 4px;  /* for vertical scrollbars */
       height: 12px; /* for horizontal scrollbars */
     }
     
@@ -114,4 +126,8 @@ input:focus {
     {
       background: rgba(0, 0, 0, 0.5);
     }
+    ::-webkit-scrollbar:hover{
+      width: 100px;
+    border: 10;
+}
 </style>
