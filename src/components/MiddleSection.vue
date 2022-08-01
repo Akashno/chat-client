@@ -68,7 +68,10 @@
                   {{ moment(chat.createdAt).format("h:mm a") }}
                 </p>
               </div>
-              <p class="text-gray-500 text-xs text-sm">{{ chat.message }}</p>
+              <div class="" style="">
+
+              <p class="text-gray-500 max-w-4xl   text-sm break-words" >{{ chat.message }}</p>
+              </div>
             </span>
           </div>
         </div>
