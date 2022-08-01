@@ -7,7 +7,6 @@
         <p class="font-bold"># Welcome</p>
         <div class="flex space-x-2">
           <svg
-
             @click="$store.dispatch('toggleLeftSection')"
             width="20px"
             height="20px"
@@ -66,7 +65,7 @@
               <div class="flex justify-between">
                 <p class="text-sm">{{ chat.username }}</p>
                 <p class="text-x text-gray-600">
-                  {{moment(chat.createdAt).format('h:mm a')}}
+                  {{ moment(chat.createdAt).format("h:mm a") }}
                 </p>
               </div>
               <p class="text-gray-500 text-xs text-sm">{{ chat.message }}</p>
@@ -76,19 +75,68 @@
         <div ref="chat" class="h-14"></div>
       </div>
     </div>
-    <div class=" py-0 flex border-2 rounded-full pl-3 items-center">
+
+    <div class="py-0 flex border-2 rounded-full pl-3 items-center relative">
+      <emoji-picker @emoji="insert" :search="search">
+        <div
+          slot="emoji-invoker"
+          slot-scope="{ events: { click: clickEvent } }"
+          @click.stop="clickEvent"
+          class=""
+        >
+          <p class="text-3xl -mt-1 cursor-pointer text-gray-500 hover:text-gray-700">☺</p>
+        </div>
+        <div
+          slot="emoji-picker"
+          slot-scope="{ emojis, insert, display }"
+          class="w-48 h-48 absolute bottom-16 overflow-x-hidden bg-white"
+          style="overflow-y: scroll; "
+        >
+          <div class="">
+            <div class="flex justify-between pr-4 pt-4">
+              <input
+                type="text"
+                v-model="search"
+                placeholder="Search for emoji ...."
+                autofocus
+                
+              />
+            </div>
+            <div
+            >
+              <div v-for="(emojiGroup, category) in emojis" :key="category">
+                <hr  class="my-2"/>
+                <div>
+                  <span
+                  class="cursor-pointer"
+                    v-for="(emoji, emojiName) in emojiGroup"
+                    :key="emojiName"
+                    @click="insert(emoji)"
+                    :title="emojiName"
+                    >{{ emoji }}</span
+                  >
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </emoji-picker>
+
       <input
         type="text"
+        id="mytextarea"
         autofocus
         placeholder="Type your message"
-        class="w-full h-8 px-4 mr-4 "
+        class="w-full h-8 px-4 mr-4"
         @keypress.enter="sendMessage()"
         v-model="message"
       />
+
       <button
         @click="sendMessage()"
         type="button"
-        class=" text-blue-700 border border-blue-700 hover:bg-blue-400 hover:text-white focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-blue-500 dark:hover:text-white"
+        class="text-blue-700 border border-blue-700 hover:bg-blue-400 hover:text-white focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-blue-500 dark:hover:text-white"
       >
         <svg
           aria-hidden="true"
@@ -111,7 +159,12 @@
 
 <script>
 import moment from "moment";
+import EmojiPicker from "vue-emoji-picker";
+
 export default {
+  components: {
+    EmojiPicker,
+  },
   props: {
     socket: {
       type: Object,
@@ -124,6 +177,7 @@ export default {
       username: null,
       room: null,
       moment: moment,
+      search: "",
     };
   },
   mounted() {
@@ -148,6 +202,9 @@ export default {
     this.joinRoom(this.username, this.room._id);
   },
   methods: {
+    insert(emoji) {
+      this.message += emoji;
+    },
     joinRoom(username, roomId) {
       this.socket.emit("userJoin", { username, roomId }, (response) => {
         this.$store.dispatch("setMember", response.user);
@@ -203,5 +260,10 @@ input:focus {
 ::-webkit-scrollbar:hover {
   width: 100px;
   border: 10;
+}
+
+input,
+input::placeholder {
+  font: 14px sans-serif;
 }
 </style>
