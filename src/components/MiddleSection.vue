@@ -66,7 +66,7 @@
               <div class="flex justify-between">
                 <p class="text-sm">{{ chat.username }}</p>
                 <p class="text-x text-gray-600">
-                  {{ moment(chat.createAt).format("h:mm a") }}
+                  {{moment(chat.createdAt).format('h:mm a')}}
                 </p>
               </div>
               <p class="text-gray-500 text-xs text-sm">{{ chat.message }}</p>
