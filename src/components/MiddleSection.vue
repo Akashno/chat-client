@@ -2,10 +2,11 @@
   <div
     class="text-left pt-4 border-r-2 dark:border-chatBg chatScreen flex flex-col justify-between dark:bg-chatBg" >
     <div >
-      <div class="mx-4 flex justify-between ">
+      <div class="mx-4 flex justify-between  items-center">
         <p class="font-bold dark:text-white"># Welcome</p>
-        <div class="flex space-x-2">
+        <div class="flex space-x-2 ">
           <svg
+          class="cursor-pointer"
             title="view users"
             @click="$store.dispatch('toggleRightSection')"
             width="20px"
@@ -24,8 +25,7 @@
           </svg>
         </div>
       </div>
-
-      <hr class="mt-2  mx-0 dark:border-chatBg" />
+      <hr class="my-2 mb-3  mx-0 dark:border-chatBg" />
       <div class="chatSection dark:bg-chatBg ">
         <div
           v-for="(chat, index) in chats"
@@ -68,7 +68,7 @@
           @click.stop="clickEvent"
           class=""
         >
-          <p class="text-3xl -mt-1 cursor-pointer text-gray-500 hover:text-gray-700">☺</p>
+          <p class="text-3xl -mt-1 cursor-pointer text-gray-500 dark:hover:text-gray-100 hover:text-gray-800">☺</p>
         </div>
         <div
           slot="emoji-picker"
@@ -122,7 +122,7 @@
       <button
         @click="sendMessage()"
         type="button"
-        class=" border border-white hover:bg-blue-400 hover:text-white focus:outline-none font-medium rounded-full text-sm m-1 p-1.5 text-center inline-flex items-center dark:text-blue-500 dark:hover:text-white"
+        class=" border border-white hover:text-white focus:outline-none font-medium rounded-full text-sm m-1 p-1.5 text-center inline-flex items-center dark:hover:text-white text-gray-400"
       >
         <svg
           aria-hidden="true"

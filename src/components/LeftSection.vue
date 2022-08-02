@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between dark:bg-rightBg">
+  <div class="flex justify-between dark:bg-rightBg wrapper">
     <p class="font-light text-sm py-3 flex justify-between items-center">
       <!-- License: Apache. Made by grommet: https://github.com/grommet/grommet-icons -->
       
@@ -38,4 +38,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+ 
+.wrapper {
+  height: calc(100vh - 45px);
+}
+</style>

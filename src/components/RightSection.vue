@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 pt-4 text-left dark:text-white dark:bg-rightBg">
+  <div class="px-4 pt-4 text-left dark:text-white dark:bg-rightBg wrapper">
 
     <p class="font-bold ">Users</p>
     <div class="content pt-4">
@@ -68,6 +68,11 @@ export default {
 </script>
 
 <style scoped>
+
+ 
+.wrapper {
+  height: calc(100vh - 45px);
+}
 .content {
   height: calc(100vh - 100px);
   overflow-y: auto;

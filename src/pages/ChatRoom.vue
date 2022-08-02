@@ -17,6 +17,7 @@ import NavBar from '../components/Navbar.vue'
 import RightSection from '../components/RightSection.vue'
 import MiddleSection from '../components/MiddleSection.vue'
 import LeftSection from '../components/LeftSection.vue'
+import {baseUrl} from "../config.js"
 export default {
     components:{
      NavBar,
@@ -52,8 +53,7 @@ export default {
       let deviceId = null
       if(isNew)  deviceId = this.getDeviceId()
       else  deviceId = localStorage.getItem('deviceId') || this.getDeviceId()
-      // this.socket =  io("http://localhost:3000",{ query: { token:deviceId } })
-      this.socket =  io("https://chat-express-api.herokuapp.com/",{ query: { token:deviceId } })
+      this.socket =  io(baseUrl,{ query: { token:deviceId } })
     },
     getDeviceId(){
       const deviceId = Math.floor(Math.random() * 1000000000);

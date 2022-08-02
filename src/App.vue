@@ -12,5 +12,14 @@
   text-align: center;
   color: #2c3e50;
 }
+.disableSelect{
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -o-user-select: none;
+    -moz-user-select: none;
 
+    pointer-events:none;
+}
 </style>
