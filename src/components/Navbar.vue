@@ -4,7 +4,7 @@
       <div
         class="w-4 h-4 bg-indigo-600 rounded-full mr-2 ring-indigo-500 border-indigo-500 border-4 animate-pulse"
       ></div>
-      Messenger
+      Goofy
     </div>
     <span class="flex space-x-3 items-center">
       <img

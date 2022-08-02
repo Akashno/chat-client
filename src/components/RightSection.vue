@@ -29,17 +29,12 @@
         </div>
       </div>
     </div>
-    <LeftSection class="my-4 md:hidden" :socket="socket" />
   </div>
 </template>
 
 <script>
-import LeftSection from "./LeftSection.vue";
 import moment from "moment";
 export default {
-  components: {
-    LeftSection,
-  },
   props: {
     socket: {
       type: Object,
