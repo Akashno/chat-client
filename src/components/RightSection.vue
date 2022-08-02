@@ -1,7 +1,7 @@
 <template>
-  <div class="px-4 pt-4 text-left">
+  <div class="px-4 pt-4 text-left dark:text-white dark:bg-rightBg">
 
-      <p class="font-bold ">Users</p>
+    <p class="font-bold ">Users</p>
     <div class="content pt-4">
       <div v-for="(user, index) in users" :key="index" class="mb-4">
         <div class="flex items-center gap-2">
@@ -20,10 +20,10 @@
             <div class="flex flex-col">
               <span class="text-sm">{{ user.username }}</span>
 
-              <span v-if="!user.isActive" class="text-x text-gray-600">
+              <span v-if="!user.isActive" class="text-x text-gray-600 dark:text-gray-400">
                 {{ getLastSeen(user.updatedAt) }}
               </span>
-              <span v-else class="text-x text-gray-600"> Online </span>
+              <span v-else class="text-x dark:text-gray-400 text-gray-600"> Online </span>
             </div>
           </span>
         </div>

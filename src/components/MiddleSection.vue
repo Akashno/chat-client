@@ -1,42 +1,17 @@
 <template>
   <div
-    class="text-left pt-4 border-r-2 chatScreen flex flex-col justify-between"
-  >
-    <div>
-      <div class="mx-4 flex justify-between">
-        <p class="font-bold"># Welcome</p>
+    class="text-left pt-4 border-r-2 dark:border-chatBg chatScreen flex flex-col justify-between dark:bg-chatBg" >
+    <div >
+      <div class="mx-4 flex justify-between ">
+        <p class="font-bold dark:text-white"># Welcome</p>
         <div class="flex space-x-2">
-          <svg
-            @click="$store.dispatch('toggleLeftSection')"
-            width="20px"
-            height="20px"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M12 3.53846C7.32682 3.53846 3.53846 7.32682 3.53846 12C3.53846 16.6732 7.32682 20.4615 12 20.4615C16.6732 20.4615 20.4615 16.6732 20.4615 12C20.4615 7.32682 16.6732 3.53846 12 3.53846ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12Z"
-              fill="#030D45"
-            />
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M12 16.359C12.4248 16.359 12.7692 16.0146 12.7692 15.5897V11.4872C12.7692 11.0623 12.4248 10.7179 12 10.7179C11.5752 10.7179 11.2308 11.0623 11.2308 11.4872V15.5897C11.2308 16.0146 11.5752 16.359 12 16.359Z"
-              fill="#030D45"
-            />
-            <path
-              d="M13.0256 8.41026C13.0256 7.84381 12.5664 7.38462 12 7.38462C11.4336 7.38462 10.9744 7.84381 10.9744 8.41026C10.9744 8.9767 11.4336 9.4359 12 9.4359C12.5664 9.4359 13.0256 8.9767 13.0256 8.41026Z"
-              fill="#030D45"
-            />
-          </svg>
           <svg
             title="view users"
             @click="$store.dispatch('toggleRightSection')"
             width="20px"
             height="20px"
             viewBox="0 0 24 24"
+            fill="#808080"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -50,8 +25,8 @@
         </div>
       </div>
 
-      <hr class="mt-2 my-6 mx-0" />
-      <div class="chatSection">
+      <hr class="mt-2  mx-0 dark:border-chatBg" />
+      <div class="chatSection dark:bg-chatBg ">
         <div
           v-for="(chat, index) in chats"
           :key="index"
@@ -63,23 +38,29 @@
             </span>
             <span class="col-span-11 w-full">
               <div class="flex justify-between">
-                <p class="text-sm">{{ chat.username }}</p>
-                <p class="text-x text-gray-600">
+                <p class="text-sm dark:text-white">{{ chat.username }}</p>
+                <p class="text-x text-gray-600 dark:text-gray-400">
                   {{ moment(chat.createdAt).format("h:mm a") }}
                 </p>
               </div>
               <div class="" style="">
 
-              <p class="text-gray-500 max-w-4xl   text-sm break-words" >{{ chat.message }}</p>
+              <div class="text-gray-500 max-w-4xl pt-1  text-sm break-words " >
+
+               <p class=" max-w-max px-2 py-2 text-xs dark:text-white bg-gray-100 dark:bg-chat rounded-3xl  rounded-tl-none">{{ chat.message }}</p>
+
+
+              </div>
               </div>
             </span>
           </div>
         </div>
-        <div ref="chat" class="h-14"></div>
+        <div ref="chat" class="h-8 mt-24"></div>
       </div>
     </div>
+    <div class="dark:bg-chatBg">
 
-    <div class="py-0 flex border-2 rounded-full pl-3 items-center relative">
+    <div class="py-0 flex border-2 pl-3 items-center relative dark:bg-chatInputBg dark:border-chatInputBg">
       <emoji-picker @emoji="insert" :search="search">
         <div
           slot="emoji-invoker"
@@ -92,16 +73,18 @@
         <div
           slot="emoji-picker"
           slot-scope="{ emojis, insert, display }"
-          class="w-48 h-48 absolute bottom-16 overflow-x-hidden bg-white"
+          class="w-48 h-48 absolute bottom-16 overflow-x-hidden bg-white dark:bg-chatInputBg p-2"
           style="overflow-y: scroll; "
         >
           <div class="">
-            <div class="flex justify-between pr-4 pt-4">
+            <div class="flex justify-between pr-4 pt-4 ">
               <input
                 type="text"
+
                 v-model="search"
                 placeholder="Search for emoji ...."
                 autofocus
+                class="dark:bg-chatInputBg dark:text-white dark:text-xs "
                 
               />
             </div>
@@ -131,7 +114,7 @@
         id="mytextarea"
         autofocus
         placeholder="Type your message"
-        class="w-full h-8 px-4 mr-4"
+        class="w-full h-8 px-4 mr-4 dark:bg-chatInputBg dark:outline-none dark:text-white"
         @keypress.enter="sendMessage()"
         v-model="message"
       />
@@ -139,7 +122,7 @@
       <button
         @click="sendMessage()"
         type="button"
-        class="text-blue-700 border border-blue-700 hover:bg-blue-400 hover:text-white focus:outline-none font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-blue-500 dark:hover:text-white"
+        class=" border border-white hover:bg-blue-400 hover:text-white focus:outline-none font-medium rounded-full text-sm m-1 p-1.5 text-center inline-flex items-center dark:text-blue-500 dark:hover:text-white"
       >
         <svg
           aria-hidden="true"
@@ -156,6 +139,7 @@
         </svg>
         <span class="sr-only">Icon description</span>
       </button>
+    </div>
     </div>
   </div>
 </template>
@@ -237,11 +221,11 @@ export default {
 
 <style scoped>
 .chatScreen {
-  height: calc(100vh - 58px);
+  height: calc(100vh - 57px);
 }
 
 .chatSection {
-  height: calc(100vh - 200px);
+  height: calc(100vh - 152px);
   overflow-y: scroll;
 }
 textarea:focus,

@@ -1,9 +1,9 @@
 <template>
-  <div class="w-screen max-w-1/2 mx-auto">
+  <div class="w-screen max-w-1/2 mx-auto min-h-screen">
     <NavBar :socket="socket"/>
-    <hr />
+    <hr class="dark:border-chatBg"/>
     <div class="grid grid-cols-12  text-left ">
-      <LeftSection  v-show="$store.getters.isLeftSection" class="col-span-2 px-4  border-r-2  hidden md:block" />
+      <LeftSection  v-show="$store.getters.isLeftSection" class="col-span-2 px-4  border-r-2 dark:border-chatBg  hidden md:block" />
       <MiddleSection :socket="socket"   :class="setGridSpan()"/>
       <RightSection v-show="$store.getters.isRightSection" :socket="socket"  class="md:col-span-2 col-span-4" /> 
     </div>
@@ -52,7 +52,7 @@ export default {
       let deviceId = null
       if(isNew)  deviceId = this.getDeviceId()
       else  deviceId = localStorage.getItem('deviceId') || this.getDeviceId()
-      this.socket =  io("https://chat-express-api.herokuapp.com",{ query: { token:deviceId } })
+      this.socket =  io(process.env.SOCKET_API,{ query: { token:deviceId } })
     },
     getDeviceId(){
       const deviceId = Math.floor(Math.random() * 1000000000);

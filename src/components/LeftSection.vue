@@ -1,23 +1,8 @@
 <template>
-  <div class="flex justify-between">
+  <div class="flex justify-between dark:bg-rightBg">
     <p class="font-light text-sm py-3 flex justify-between items-center">
-      <span class=""></span>
       <!-- License: Apache. Made by grommet: https://github.com/grommet/grommet-icons -->
-      <svg
-      class="hidden"
-        width="24px"
-        height="24px"
-        @click="$store.dispatch('toggleLeftSection')"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          fill="none"
-          stroke="#808080"
-          stroke-width="2"
-          d="M7,7 L17,17 M7,17 L17,7"
-        />
-      </svg>
+      
     </p>
   </div>
 </template>

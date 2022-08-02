@@ -9,9 +9,12 @@ export default new Vuex.Store({
     isLeftSection:true,
     member:null,
     room:null,
+    isDark:false
   },
   getters: {
-
+    isDark(state){
+      return state.isDark
+    },
     isLeftSection(state){
       return state.isLeftSection
     },
@@ -37,7 +40,11 @@ export default new Vuex.Store({
     },
     changeRoom(state,payload){
       state.room = payload
+    },
+    toggleDarkMode(state){
+      state.isDark = !state.isDark
     }
+
   },
   actions: {
     toggleRightSection({commit}){
@@ -52,6 +59,9 @@ export default new Vuex.Store({
     },
     changeRoom({commit},payload){
       commit('changeRoom',payload)
+    },
+    toggleDarkMode({commit}){
+      commit('toggleDarkMode')
     }
   },
   modules: {
