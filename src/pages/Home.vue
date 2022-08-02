@@ -71,7 +71,8 @@ export default {
       this.username= localStorage.getItem('username')
       if(deviceId) {this.isNew = false;this.isOldUser=true}
 
-      fetch(process.env.SOCKET_API+'/rooms')
+      // fetch('http://localhost:3000/rooms')
+      fetch('https://chat-express-api.herokuapp.com/rooms')
       .then((res)=>res.json())
       .then(({rooms})=>this.rooms=rooms)
     }
