@@ -1,12 +1,13 @@
 <template>
   <div
-    class="text-left pt-4 border-r-2 dark:border-chatBg chatScreen flex flex-col justify-between dark:bg-chatBg" >
-    <div >
-      <div class="mx-4 flex justify-between  items-center">
+    class="text-left pt-4 border-r-2 dark:border-chat chatScreen flex flex-col justify-between dark:bg-chatBg"
+  >
+    <div>
+      <div class="mx-4 flex justify-between items-center">
         <p class="font-bold dark:text-white"># Welcome</p>
-        <div class="flex space-x-2 ">
+        <div class="flex space-x-2">
           <svg
-          class="cursor-pointer"
+            class="cursor-pointer"
             title="view users"
             @click="$store.dispatch('toggleRightSection')"
             width="20px"
@@ -25,121 +26,130 @@
           </svg>
         </div>
       </div>
-      <hr class="my-2 mb-3  mx-0 dark:border-chatBg" />
-      <div class="chatSection dark:bg-chatBg ">
+      <hr class="my-2 mb-3 mx-0 dark:border-chat" />
+      <div class="chatSection dark:bg-chatBg">
         <div
           v-for="(chat, index) in chats"
           :key="index"
           class="mb-8 mx-4 chat-messages"
         >
-          <div class="flex gap-2">
-            <span class="col-span-1">
-              <img class="w-6 h-6 rounded-full" :src="chat.avatar" alt="" />
-            </span>
-            <span class="col-span-11 w-full">
+            <div class=" w-full">
               <div class="flex justify-between">
-                <p class="text-sm dark:text-white">{{ chat.username }}</p>
+                <div class="flex gap-3">
+                  <span class="">
+                    <img
+                      class="w-6 h-6 rounded-full"
+                      :src="chat.avatar"
+                      alt=""
+                    />
+                  </span>
+                  <div>
+                    <p class="text-xs dark:text-white">{{ chat.username }}</p>
+                    <div class="" style="">
+                      <div
+                        class="text-gray-500 max-w-4xl pt-1 text-sm break-words"
+                      >
+                        <p 
+                          class="max-w-max px-2 py-2 text-xs dark:text-white bg-gray-100 dark:bg-chat rounded-3xl rounded-tl-none"
+                        >
+                          {{ chat.message }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <p class="text-x text-gray-600 dark:text-gray-400">
-                  {{ moment(chat.createdAt).format("h:mm a") }}
+                  {{ getDate(chat.createdAt) }}
                 </p>
               </div>
-              <div class="" style="">
-
-              <div class="text-gray-500 max-w-4xl pt-1  text-sm break-words " >
-
-               <p class=" max-w-max px-2 py-2 text-xs dark:text-white bg-gray-100 dark:bg-chat rounded-3xl  rounded-tl-none">{{ chat.message }}</p>
-
-
-              </div>
-              </div>
-            </span>
-          </div>
+            </div>
         </div>
         <div ref="chat" class="h-8 mt-24"></div>
       </div>
     </div>
     <div class="dark:bg-chatBg">
-
-    <div class="py-0 flex border-2 pl-3 items-center relative dark:bg-chatInputBg dark:border-chatInputBg">
-      <emoji-picker @emoji="insert" :search="search">
-        <div
-          slot="emoji-invoker"
-          slot-scope="{ events: { click: clickEvent } }"
-          @click.stop="clickEvent"
-          class=""
-        >
-          <p class="text-3xl -mt-1 cursor-pointer text-gray-500 dark:hover:text-gray-100 hover:text-gray-800">☺</p>
-        </div>
-        <div
-          slot="emoji-picker"
-          slot-scope="{ emojis, insert, display }"
-          class="w-48 h-48 absolute bottom-16 overflow-x-hidden bg-white dark:bg-chatInputBg p-2"
-          style="overflow-y: scroll; "
-        >
-          <div class="">
-            <div class="flex justify-between pr-4 pt-4 ">
-              <input
-                type="text"
-
-                v-model="search"
-                placeholder="Search for emoji ...."
-                autofocus
-                class="dark:bg-chatInputBg dark:text-white dark:text-xs "
-                
-              />
-            </div>
-            <div
+      <div
+        class="py-0 flex border-2 items-center relative dark:bg-chatInputBg dark:border-chatInputBg"
+      >
+        <emoji-picker @emoji="insert" :search="search">
+          <div
+            slot="emoji-invoker"
+            slot-scope="{ events: { click: clickEvent } }"
+            @click.stop="clickEvent"
+            class=""
+          >
+            <p
+              class="text-3xl -mt-1 cursor-pointer text-gray-500 dark:hover:text-gray-100 hover:text-gray-800"
             >
-              <div v-for="(emojiGroup, category) in emojis" :key="category">
-                <hr  class="my-2"/>
-                <div>
-                  <span
-                  class="cursor-pointer"
-                    v-for="(emoji, emojiName) in emojiGroup"
-                    :key="emojiName"
-                    @click="insert(emoji)"
-                    :title="emojiName"
-                    >{{ emoji }}</span
-                  >
+              ☺
+            </p>
+          </div>
+          <div
+            slot="emoji-picker"
+            slot-scope="{ emojis, insert, display }"
+            class="w-48 h-48 absolute bottom-16 overflow-x-hidden bg-white dark:bg-chatInputBg p-2"
+            style="overflow-y: scroll"
+          >
+            <div class="">
+              <div class="flex justify-between pr-4 pt-4">
+                <input
+                  type="text"
+                  v-model="search"
+                  placeholder="Search for emoji ...."
+                  autofocus
+                  class="dark:bg-chatInputBg dark:text-white dark:text-xs"
+                />
+              </div>
+              <div>
+                <div v-for="(emojiGroup, category) in emojis" :key="category">
+                  <hr class="my-2" />
+                  <div>
+                    <span
+                      class="cursor-pointer"
+                      v-for="(emoji, emojiName) in emojiGroup"
+                      :key="emojiName"
+                      @click="insert(emoji)"
+                      :title="emojiName"
+                      >{{ emoji }}</span
+                    >
+                  </div>
                 </div>
-
               </div>
             </div>
           </div>
-        </div>
-      </emoji-picker>
+        </emoji-picker>
 
-      <input
-        type="text"
-        id="mytextarea"
-        autofocus
-        placeholder="Type your message"
-        class="w-full h-8 px-4 mr-4 dark:bg-chatInputBg dark:outline-none dark:text-white"
-        @keypress.enter="sendMessage()"
-        v-model="message"
-      />
+        <input
+          type="text"
+          id="mytextarea"
+          autofocus
+          placeholder="Type your message"
+          class="w-full h-8 px-4 mr-4 dark:bg-chatInputBg dark:outline-none dark:text-white"
+          @keypress.enter="sendMessage()"
+          v-model="message"
+        />
 
-      <button
-        @click="sendMessage()"
-        type="button"
-        class=" border border-white hover:text-white focus:outline-none font-medium rounded-full text-sm m-1 p-1.5 text-center inline-flex items-center dark:hover:text-white text-gray-400"
-      >
-        <svg
-          aria-hidden="true"
-          class="w-5 h-5"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
+        <button
+          @click="sendMessage()"
+          type="button"
+          class="border m-2 border-gray-800 hover:text-gray-900 dark:border-white dark:hover:text-white focus:outline-none font-medium rounded-full text-sm  p-1.5 text-center inline-flex items-center  text-gray-800 dark:text-gray-400"
         >
-          <path
-            fill-rule="evenodd"
-            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-            clip-rule="evenodd"
-          ></path>
-        </svg>
-        <span class="sr-only">Icon description</span>
-      </button>
-    </div>
+          <svg
+            aria-hidden="true"
+            class="w-3 h-3 "
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <span class="sr-only">Icon description</span>
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -168,6 +178,7 @@ export default {
     };
   },
   mounted() {
+
     this.socket.on("message", (message) => {
       this.chats.push(message);
       let element = this.$refs["chat"];
@@ -197,6 +208,7 @@ export default {
         this.$store.dispatch("setMember", response.user);
         if (!response.messages.length) return;
         this.chats = response.messages;
+
         let element = this.$refs["chat"];
         element.scrollIntoView({
           behavior: "smooth",
@@ -214,6 +226,12 @@ export default {
         block: "end",
         inline: "end",
       });
+    },
+    getDate(createdAt) {
+      if (!createdAt) return "";
+      let lastSeen = moment().diff(createdAt, "hours");
+      if (lastSeen > 24) return moment(createdAt).format("DD/MM/YYYY");
+      return moment(createdAt).format("h:mm a");
     },
   },
 };

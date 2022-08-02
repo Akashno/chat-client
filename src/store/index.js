@@ -9,7 +9,7 @@ export default new Vuex.Store({
     isLeftSection:true,
     member:null,
     room:null,
-    isDark:false
+    isDark:true
   },
   getters: {
     isDark(state){
