@@ -15,7 +15,8 @@ module.exports = {
         chatInputBg:"#2D2D2C",
         rightBg:"#1f1e1f",
         navBg:"#2C2C2D",
-        white:"#FEFEFF"
+        white:"#FEFEFF",
+        home:"#121313"
 
         // primary:"#F2F6FE",
         // chat:"#27282F",

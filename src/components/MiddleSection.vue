@@ -33,36 +33,32 @@
           :key="index"
           class="mb-8 mx-4 chat-messages"
         >
-            <div class=" w-full">
-              <div class="flex justify-between">
-                <div class="flex gap-3">
-                  <span class="">
-                    <img
-                      class="w-6 h-6 rounded-full"
-                      :src="chat.avatar"
-                      alt=""
-                    />
-                  </span>
-                  <div>
-                    <p class="text-xs dark:text-white">{{ chat.username }}</p>
-                    <div class="" style="">
-                      <div
-                        class="text-gray-500 max-w-4xl pt-1 text-sm break-words"
+          <div class="w-full">
+            <div class="flex justify-between">
+              <div class="flex gap-3">
+                <span class="">
+                  <img class="w-6 h-6 rounded-full" :src="chat.avatar" alt="" />
+                </span>
+                <div>
+                  <p class="text-xs dark:text-white">{{ chat.username }}</p>
+                  <div class="" style="">
+                    <div
+                      class="text-gray-500 max-w-4xl pt-1 text-sm break-words"
+                    >
+                      <p
+                        class="max-w-max px-2 py-2 text-xs dark:text-white bg-gray-100 dark:bg-chat rounded-3xl rounded-tl-none"
                       >
-                        <p 
-                          class="max-w-max px-2 py-2 text-xs dark:text-white bg-gray-100 dark:bg-chat rounded-3xl rounded-tl-none"
-                        >
-                          {{ chat.message }}
-                        </p>
-                      </div>
+                        {{ chat.message }}
+                      </p>
                     </div>
                   </div>
                 </div>
-                <p class="text-x text-gray-600 dark:text-gray-400">
-                  {{ getDate(chat.createdAt) }}
-                </p>
               </div>
+              <p class="text-x text-gray-600 dark:text-gray-400">
+                {{ getDate(chat.createdAt) }}
+              </p>
             </div>
+          </div>
         </div>
         <div ref="chat" class="h-8 mt-24"></div>
       </div>
@@ -132,11 +128,11 @@
         <button
           @click="sendMessage()"
           type="button"
-          class="border m-2 border-gray-800 hover:text-gray-900 dark:border-white dark:hover:text-white focus:outline-none font-medium rounded-full text-sm  p-1.5 text-center inline-flex items-center  text-gray-800 dark:text-gray-400"
+          class="border m-2 border-gray-800 hover:text-gray-900 dark:border-white dark:hover:text-white focus:outline-none font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center text-gray-800 dark:text-gray-400"
         >
           <svg
             aria-hidden="true"
-            class="w-3 h-3 "
+            class="w-3 h-3"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +174,6 @@ export default {
     };
   },
   mounted() {
-
     this.socket.on("message", (message) => {
       this.chats.push(message);
       let element = this.$refs["chat"];
@@ -246,7 +241,6 @@ export default {
   height: calc(100vh - 152px);
   overflow-y: scroll;
 }
-textarea:focus,
 input:focus {
   outline: none;
 }
