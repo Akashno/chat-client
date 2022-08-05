@@ -1,4 +1,4 @@
-# chat-client
+# Goofy-chat 
 
 ## Project setup
 ```
