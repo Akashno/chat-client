@@ -35,7 +35,7 @@
         >
           <div class="w-full">
             <div class="flex justify-between">
-              <div class="flex gap-3">
+              <div class="flex gap-2">
                 <span class="">
                   <img class="w-6 h-6 rounded-full" :src="chat.avatar" alt="" />
                 </span>
@@ -60,13 +60,12 @@
             </div>
           </div>
         </div>
-        <div ref="chat" class="h-8 mt-24"></div>
+        <div ref="chat" class=" mt-24"></div>
       </div>
     </div>
     <div class="dark:bg-chatBg">
       <div
-        class="py-0 flex border-2 items-center relative dark:bg-chatInputBg dark:border-chatInputBg"
-      >
+        class="py-0 flex border-2 items-center relative dark:bg-chatInputBg dark:border-chatInputBg" >
         <emoji-picker @emoji="insert" :search="search">
           <div
             slot="emoji-invoker"
@@ -176,13 +175,7 @@ export default {
   mounted() {
     this.socket.on("message", (message) => {
       this.chats.push(message);
-      let element = this.$refs["chat"];
-      if (!element) return;
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "end",
-        inline: "end",
-      });
+      this.scrollDown()
     });
     this.username =
       this.$route.params.username || localStorage.getItem("username");
@@ -198,18 +191,24 @@ export default {
     insert(emoji) {
       this.message += emoji;
     },
-    joinRoom(username, roomId) {
-      this.socket.emit("userJoin", { username, roomId }, (response) => {
-        this.$store.dispatch("setMember", response.user);
-        if (!response.messages.length) return;
-        this.chats = response.messages;
-
+    scrollDown(){
         let element = this.$refs["chat"];
+      if (!element) return;
         element.scrollIntoView({
           behavior: "smooth",
           block: "end",
           inline: "end",
         });
+    },
+    joinRoom(username, roomId) {
+      this.socket.emit("userJoin", { username, roomId }, (response) => {
+        this.$store.dispatch("setMember", response.user);
+        if (!response.messages.length) return;
+        this.chats = response.messages;
+        this.setTimeout(() => {
+           this.scrollDown()
+        }, 1000);
+
       });
     },
     sendMessage() {

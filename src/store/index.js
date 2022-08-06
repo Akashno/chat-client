@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isRightSection:true,
+    isRightSection:false,
     isLeftSection:true,
     member:null,
     room:null,

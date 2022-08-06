@@ -6,7 +6,7 @@
       <div v-for="(user, index) in users" :key="index" class="mb-4">
         <div class="flex items-center gap-2">
           <div class="relative">
-            <img class="w-7 h-6 rounded-full" :src="user.avatar" altuser />
+            <img class="w-7 h-6   rounded-full" :src="user.avatar" altuser />
             <span
               class="bottom-0 left-4 absolute w-1.5 h-1.5 rounded-full"
               :class="

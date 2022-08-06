@@ -5,7 +5,7 @@
     <div class="grid grid-cols-12  text-left ">
       <LeftSection  v-show="$store.getters.isLeftSection" class="col-span-2 px-4  border-r-2 dark:border-chat  hidden md:block" />
       <MiddleSection :socket="socket"   :class="setGridSpan()"/>
-      <RightSection v-show="$store.getters.isRightSection" :socket="socket"  class="md:col-span-2 col-span-4" /> 
+      <RightSection v-show="$store.getters.isRightSection" :socket="socket" :class="!$store.getters.isRightSection ?'md:hidden':''"   class="md:col-span-2 col-span-4 px-2" /> 
     </div>
   </div>
 

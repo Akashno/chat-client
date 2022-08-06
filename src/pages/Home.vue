@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="w-screen h-screen mx-auto max-w-1/2 bg-home "
-    style=""
-  >
+  <div class="w-screen h-screen mx-auto max-w-1/2 bg-home" style="">
     <div class="flex justify-between p-8 items-center mx-0">
       <div
         class="text-xl dark:text-white font-extrabold flex items-center disableSelect"
@@ -49,8 +46,8 @@
       </div>
     </div>
     <div
-    v-show="dialog"
-      class="absolute top-1/2   left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-home dialog "
+      v-show="dialog"
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-home dialog"
     >
       <div class="absolute -right-2 -top-2 cursor-pointer">
         <button
@@ -163,7 +160,7 @@ export default {
       rooms: [],
       isOldUser: false,
       isNew: true,
-      dialog:false
+      dialog: false,
     };
   },
   mounted() {
@@ -178,26 +175,26 @@ export default {
       { opacity: 1, y: 0, duration: 1.5 }
     );
   },
-  methods:{
-   openDialog(){
-    this.dialog=true
-        gsap.fromTo(
-          ".dialog",
-          { opacity: 0, y: 100 },
-          { opacity: 1, y: 0, duration: 0.5 }
-        );
-        
-   },
-   closeDialog(){
-        gsap.fromTo( ".dialog",
-          { opacity: 1, y: 0 },
-          { opacity: 0, y: 100, duration: 0.5 }
-        );
+  methods: {
+    openDialog() {
+      this.dialog = true;
+      gsap.fromTo(
+        ".dialog",
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 0.5 }
+      );
+    },
+    closeDialog() {
+      gsap.fromTo(
+        ".dialog",
+        { opacity: 1, y: 0 },
+        { opacity: 0, y: 100, duration: 0.5 }
+      );
 
-setTimeout(()=>{
-    this.dialog=false
-},200)
-   }
+      setTimeout(() => {
+        this.dialog = false;
+      }, 200);
+    },
   },
   created() {
     let deviceId = localStorage.getItem("deviceId");
