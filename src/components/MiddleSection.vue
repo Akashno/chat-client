@@ -205,9 +205,14 @@ export default {
         this.$store.dispatch("setMember", response.user);
         if (!response.messages.length) return;
         this.chats = response.messages;
-        this.setTimeout(() => {
-           this.scrollDown()
-        }, 1000);
+        setTimeout(() => {
+        let element = this.$refs["chat"];
+        element.scrollIntoView({
+          behavior: "auto",
+          block: "end",
+          inline: "end",
+        });
+        }, 10);
 
       });
     },
